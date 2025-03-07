@@ -40,6 +40,7 @@ public class VehicleServiceImpl implements VehicleService {
 				vehicleDTO.setStrYear(vehicle.getStrYear());
 				vehicleDTO.setDtmSOAT(vehicle.getDtmSOAT());
 				vehicleDTO.setDtmTecno(vehicle.getDtmTecno());
+				vehicleDTO.setStrPlaca(vehicle.getStrPlaca());
 				vehiclesDtoLst.add(vehicleDTO);
 			});
 		} catch (Exception e) {
@@ -64,6 +65,7 @@ public class VehicleServiceImpl implements VehicleService {
 				vehicleDTO.setStrYear(vehicle.getStrYear());
 				vehicleDTO.setDtmSOAT(vehicle.getDtmSOAT());
 				vehicleDTO.setDtmTecno(vehicle.getDtmTecno());
+				vehicleDTO.setStrPlaca(vehicle.getStrPlaca());
 				vehiclesDtoLst.add(vehicleDTO);
 			});
 		} catch (Exception e) {
@@ -85,8 +87,9 @@ public class VehicleServiceImpl implements VehicleService {
 			vehicleDTO.setStrYear(vehicle.getStrYear());
 			vehicleDTO.setDtmSOAT(vehicle.getDtmSOAT());
 			vehicleDTO.setDtmTecno(vehicle.getDtmTecno());
+			vehicleDTO.setStrPlaca(vehicle.getStrPlaca());
 		} catch (Exception e) {
-			log.error("Error ejecutando servicio findVehicleById() ",e);
+			log.error("Error ejecutando servicio findVehicleById() ", e);
 			throw new Exception();
 		}
 		return vehicleDTO;
@@ -103,6 +106,7 @@ public class VehicleServiceImpl implements VehicleService {
 				vehicleToSave.setStrYear(vehicleDto.getStrYear());
 				vehicleToSave.setDtmSOAT(vehicleDto.getDtmSOAT());
 				vehicleToSave.setDtmTecno(vehicleDto.getDtmTecno());
+				vehicleToSave.setStrPlaca(vehicleDto.getStrPlaca());
 				vehicleToSave.setCustomer(vehicleCustomer);
 
 				vehicleRepository.save(vehicleToSave);
@@ -113,6 +117,14 @@ public class VehicleServiceImpl implements VehicleService {
 		}
 	}
 
-//	TODO: Buscar por info del vehiculo
-	
+	@Override
+	public List<Vehicle> findAllVehiclesByPlaca(String strPlaca) throws Exception {
+		try {
+			return vehicleRepository.findVehiclesByPlaca(strPlaca);
+		} catch (Exception e) {
+			log.error("Error ejecutando servicio saveVehicle() ", e);
+			throw new Exception();
+		}
+	}
+
 }

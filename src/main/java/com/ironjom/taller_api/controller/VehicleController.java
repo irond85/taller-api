@@ -44,8 +44,14 @@ public class VehicleController {
 	}
 
 	@PostMapping
-	private ResponseEntity<Vehicle> saveVehicle(@Valid @RequestBody VehicleDTO vehicleDto) {
+	private ResponseEntity<Object> saveVehicle(@Valid @RequestBody VehicleDTO vehicleDto) {
 		try {
+			List<Vehicle> listVehicle = vehicleService.findAllVehiclesByPlaca(vehicleDto.getStrPlaca());
+			if (listVehicle != null && !listVehicle.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body(
+						"El Vehiculo con placa: " + vehicleDto.getStrPlaca() + " ya ha sido creado anteriormente");
+			}
+
 			vehicleService.saveVehicle(vehicleDto);
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 		} catch (Exception e) {

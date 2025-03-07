@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Vehicle {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idVehicle;
 
 	@ManyToOne
@@ -39,6 +39,8 @@ public class Vehicle {
 	private String strModel;
 	@NotNull(message = "El strYear no puede ser nulo")
 	private String strYear;
+	@NotNull(message = "El campo strPlaca no puede ser nulo")
+	private String strPlaca;
 
 	private String strKm;
 	private Date dtmSOAT;

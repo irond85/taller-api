@@ -13,5 +13,8 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
 	@Query(value = "SELECT * FROM vehicles WHERE id_customer_v = :idCustomer", nativeQuery = true)
 	List<Vehicle> findVehiclesByCustomer(Long idCustomer);
+	
+	@Query(value = "SELECT * FROM vehicles WHERE str_placa = :strPlaca", nativeQuery = true)
+	List<Vehicle> findVehiclesByPlaca(String strPlaca);
 
 }

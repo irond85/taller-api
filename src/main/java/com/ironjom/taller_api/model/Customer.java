@@ -17,7 +17,7 @@ import lombok.Data;
 public class Customer {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idCustomer;
 
 	@NotNull(message = "El strNombre no puede ser nulo")

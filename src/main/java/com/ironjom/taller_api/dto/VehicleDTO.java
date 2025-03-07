@@ -14,4 +14,5 @@ public class VehicleDTO {
 	private String strKm;
 	private Date dtmSOAT;
 	private Date dtmTecno;
+	private String strPlaca;
 }
