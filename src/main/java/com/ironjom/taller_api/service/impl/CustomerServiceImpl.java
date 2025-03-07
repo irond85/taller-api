@@ -46,8 +46,18 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void saveCustomer(Customer customer) {
-		customerRepository.save(customer);
+	public void saveCustomer(CustomerDTO customerDto) throws Exception {
+		try {
+			Customer customer = new Customer();
+			customer.setStrDocument(customerDto.getStrDocument());
+			customer.setStrEmail(customerDto.getStrEmail());
+			customer.setStrName(customerDto.getStrName());
+			customer.setStrPhone(customerDto.getStrPhone());
+			customerRepository.save(customer);
+		} catch (Exception e) {
+			log.error("Error ejecutando servicio saveCustomer() ", e);
+			throw new Exception();
+		}
 	}
 
 	@Override
@@ -69,6 +79,16 @@ public class CustomerServiceImpl implements CustomerService {
 			throw new Exception();
 		}
 		return customerDto;
+	}
+
+	@Override
+	public List<Customer> findCustomerByInfo(String strName, String strDocument) throws Exception {
+		try {
+			return customerRepository.findCustomerByInfo(strName, strDocument);
+		} catch (Exception e) {
+			log.error("Error ejecutando servicio findCustomerByInfo() ", e);
+			throw new Exception();
+		}
 	}
 
 }

@@ -10,5 +10,7 @@ public interface CustomerService {
 
 	CustomerDTO findCustomerById(Long id) throws Exception;
 
-	void saveCustomer(Customer customer) throws Exception;
+	void saveCustomer(CustomerDTO customerDto) throws Exception;
+	
+	List<Customer> findCustomerByInfo(String strName, String strDocument) throws Exception;
 }

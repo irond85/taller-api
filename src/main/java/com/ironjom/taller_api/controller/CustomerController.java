@@ -64,9 +64,15 @@ public class CustomerController {
 	}
 
 	@PostMapping
-	private ResponseEntity<Customer> saveCustomer(@Valid @RequestBody Customer customer)
+	private ResponseEntity<Object> saveCustomer(@Valid @RequestBody CustomerDTO customer)
 			throws MethodArgumentNotValidException {
 		try {
+			List<Customer> listCustomer = customerService.findCustomerByInfo(customer.getStrName(),
+					customer.getStrDocument());
+			if (listCustomer != null && !listCustomer.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("El usuario ya existe");
+			}
+
 			customerService.saveCustomer(customer);
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 		} catch (Exception e) {
